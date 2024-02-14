@@ -4,7 +4,7 @@ Projeto originalmente criado pelo feudo Verde Pântano para a matéria FGA 0084 
 
 # O que é o Medconnect?
 
-O Medconnect se trata de um site que disponibiliza informações sobre hospitais para o público e permite a avaliação desses hospitais pelos mesmos.
+O Medconnect se trata de um site que disponibiliza informações sobre hospitais para o público e permite a avaliação desses hospitais pelos mesmos. Acesse o site com este [link](https://medconnect-verde-pantano.vercel.app/).
 
 # Responsáveis pelo Projeto
 
