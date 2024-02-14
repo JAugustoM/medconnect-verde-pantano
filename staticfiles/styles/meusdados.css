@@ -1,0 +1,208 @@
+@charset "UTF-8";
+
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Oleo+Script:wght@400;700&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root{
+    --letter-logotype: #2A8C4A;
+    /*--letter-nav: #064119;*/
+    --letter-nav: #042a10;
+    --back-header1: #9BFAB0;
+
+    --division-line: #64C27B;
+    --back-nav1: #64C27B;
+    --back-nav-selected1: #2A8C4A;
+    --back-nav2: #D0FDD7;
+    --back-nav-selected2: #76b88ccf;
+    --back-nav3: #76B88C;
+    --black: #000000;
+    --color3: #024053;
+    --c-orange: #fda035;
+    --c-yellow: #FBFE2D;
+    --c-green: #6EFF57;
+    --c-blue: #577CFF;
+    --clr:#9BFAB0;
+    --clr2:#64C27B;
+    --clr3:#2A8C4A;
+
+    --fonte-padrao: 'Inter', sans-serif;
+    --fonte-destaque: 'Open sans', sans-serif;
+    --fonte-titulo: 'Oleo script', sans-serif; 
+}
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+html{
+    height: 100%;
+    font-size: 62.5%;
+}
+body{
+    background-color: #ededed;
+    min-height: 100vh;
+}
+main{
+    width: 65%;
+    margin: auto;
+    background-color: #f5f5f5;
+    padding: 22px 50px 120px 50px;
+    box-shadow: 1px 1px 4px 0px lightgray;
+    font-family: var(--fonte-destaque);
+}
+#box_title{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color3);
+    font-size: 2.6rem;
+    padding: 2px 0;
+    /* margin-top: 22px; */
+    margin-bottom: 6px;   
+}
+#title{
+    position: relative;
+    display: block;
+    color: var(--color3);
+    font-size: 26px;
+    font-weight: bold;
+    padding: 2px 0;
+    margin-left: 10px;
+    margin-bottom: 6px;
+}
+h2{
+    font-size: 2.2rem;
+    margin: 30px 0 10px 0;
+    font-weight: 550;
+    font-family: var(--fonte-destaque);
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+h3{
+    margin: 10px 0 10px 0;
+    font-weight: 550;
+    font-size: 1.rem;
+    font-family: var(--fonte-destaque);
+    /* background-color: rgba(95, 158, 160, 0.53); */
+    background-image: linear-gradient( to right, rgba(95, 158, 160, 0.218) 98%, whitesmoke );
+}
+h5, span{
+    font-size: 1.8rem;
+    font-weight: normal;
+}
+h4{
+    font-size: 2rem;
+    margin: 10px 0 7px 0;
+    font-weight: 520;
+    font-family: var(--fonte-destaque);
+}
+span{
+    margin: 5px 0;
+}
+.general_container,
+.complete_answer,
+.inner_container,
+.hmp_container,
+.medicamentos,
+#tipos_contato{
+    display: flex;
+    flex-direction: column;
+}
+.general_container{
+    margin: 20px 0 20px 0;
+}
+.inner_container{
+    margin-bottom: 5px;
+}
+.hmp_container{
+    margin: 10px 0;
+    align-items: first baseline;
+}
+#contato{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+.complete_answer{
+    margin: 10px 0;
+}
+li{
+    font-size: 1.8rem;
+    margin: 2px 0px 2px 20px;
+}
+.hmp_container > span,
+.general_container > span,
+.sem_registro, h5{
+    margin-left: 10px;
+}
+.medicamentos{
+    margin: 7px 0 7px 10px;
+}
+#nome, #idade, #sexo, #profissao, #endereco, #telefone, #e-mail, #peso, #altura, #tp_sanguineo, #freq1, #freq2, #resp1, #resp2, #num_internacoes, #motivos_internacao, .grau_parentesco, .condicao_familiar, .nome_med_cp, .nome_med_sp, .freq_med_cp, .freq_med_sp{
+    margin-left: 5px;
+}
+#btn_editar_dados{
+    font-size: 2rem;
+    font-weight: 500;
+    background-color: #577bff89;
+    padding: 7px;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 1px 1px 4px 0px gray;
+    margin-top: 10px;
+}
+#btn_editar_dados:hover{
+    cursor: pointer;
+    background-color: #577CFF;
+}
+
+@media (max-width: 2560px){
+    main{
+        width: 40%;
+    }
+}
+@media (max-width: 1440px){
+    main{
+        width: 70%;
+    }
+}
+@media (max-width: 1024px) {
+    #title{
+        font-size: 2rem;
+    }
+}
+@media (max-width: 768px){
+    main{
+        width: 90%;
+    }
+    #title{
+        margin-top: 20px;
+    }
+    h1, h3{
+        font-size: 1.7rem;
+    }
+}
+@media (max-width: 468px) {
+    main{
+        width: 100%;
+    }
+    #editar_dados1{
+        display: none;
+    }
+    #editar_dados2{
+        display: block;
+    }
+}
+@media (max-width: 375px) {
+    h2{
+        font-size: 1.8rem;
+    }
+}
+@media (max-width: 375px) {
+    h2{
+        font-size: 1.8rem;
+    }
+}

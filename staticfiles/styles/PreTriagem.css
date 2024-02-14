@@ -1,0 +1,76 @@
+:root{
+    --clrblue: #1D7ff1;
+    --clrtriagem: #383838;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.container_pre-triagem{
+    padding: 30px 40px 30px 40px;
+    display: flex;
+}
+
+.div1, .div2{
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.div1{
+    border: 1px solid var(--clrtriagem);
+    margin-right: 50px;
+}
+
+.div2{
+    border: 1px solid var(--clrtriagem);
+}
+label{
+    font-size: 16px;
+}
+.pergunta_idade{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 400px;
+    font-size: 20px;
+    text-align: justify;
+    color: black;
+}
+.titule_pre-triagem{
+    color: var(--clrtriagem);
+    font-size: 25px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.phrase_pre-triagem{
+    color: #757272;
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: justify;
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+.btn_preTriagem{
+    margin-left: 320px;
+    display: inline;
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+    background-color: var(--clrblue);
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+.checkbox_pre-triagem_1{
+    display: inline; margin-top: 10px; margin-bottom: 8px;
+}
+.checkbox_pre-triagem_1{
+    cursor: pointer;
+}
+.btn_preTriagem:hover{
+    background-color: #023D83;
+    box-shadow: none;
+    cursor: pointer;
+}
