@@ -1,0 +1,197 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta | MedConnect</title>
+    <link rel="stylesheet" href="{% static "styles/css_criarconta_3.css"%}">
+</head>
+<body>
+    <div class="multi-step-form-container">
+        <form id="regForm" action="{% url "cadastro" %}" method="POST">
+          {% csrf_token %}
+            <div class="tab">
+                <h1>Criar conta -<br>etapa 1 de 2</h1>
+                <!--<img src="https://electricwoodlands.com/wp-content/uploads/2021/06/Google_NoHover.png" style="width:60%;height:auto;">
+                <img src="https://electricwoodlands.com/wp-content/uploads/2021/06/FB_NoHover.png" style="width:60%;height:auto;">-->
+                {% for message in messages %}
+                <p style="font-weight: bold;">{{ message }}</p>
+                {% endfor %}
+                <div class="formtag">EMAIL:</div>
+                <p>
+                  <input name="email" type="email" placeholder="Digite aqui o seu e-mail" oninput="this.className = ''">
+                </p>
+                <div class="formtag">Senha:</div>
+                <p>
+                  <input name="senha_1" type="password" required="required" pattern="{8,}" placeholder="Digite aqui a sua senha" oninput="this.classeName = ''">
+                </p>
+                <div class="formtag">Confirmar senha:</div>
+                <p>
+                  <input name="senha_2" type="password" placeholder="Digite novamente a sua senha" oninput="this.classeName = ''">
+                </p>
+                <p id="infosenha">a. Mínimo de 8 caracteres<br>b. Mínimo de <!--2--> 1 número<!--s--><br>c. Mínimo de 1 caractere especial<br>d. Mínimo de 1 letra maiúscula<br>e. Mínimo de 1 letra minúscula</p>
+            </div>
+            <div class="tab">
+              <!--ETAPA 2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                <h1>Criar conta -<br>etapa 2 de 2</h1>
+                  <div class="flex-container-2">
+                    <div class="item-2">
+                      <div class="formtag">Nome:
+                      </div>
+                      <p>
+                        <input name="nome" placeholder="Digite aqui seu nome" class="input2" oninput="this.className = ''">
+                      </p>
+                    </div>
+                    <div class="item-2">
+                      <div class="formtag">Sobrenome:
+                      </div>
+                      <p>
+                        <input name="sobrenome" placeholder="Digite aqui seu sobrenome" class="input2" oninput="this.className = ''">
+                      </p>
+                    </div>
+                  </div>
+                <div class="flex-container-2">
+                  <div class="item-3">
+                    <div class="formtag">Data de nascimento: (DD/MM/AA)
+                    </div>
+                    <p>
+                      <input name="data_nascimento" type="date" placeholder="Digite aqui sua data de nascimento" class="input3" oninput="this.className = ''">
+                    </p>
+                  </div>
+                  <div class="item-2">
+                    <div class="formtag">Gênero:
+                    </div>
+                    <p>
+                      <!--<input placeholder="XXX" class="input2" oninput="this.className = ''">-->
+                      <!--<input type="radio" id="masculino" name="genero" value="Masculino">
+                      <label for="masculino">Masculino</label>
+                      <input type="radio" id="feminino" name="genero" value="Feminino">
+                      <label for="feminino">Feminino</label>
+                      <input type="radio" id="outro" name="genero" value="outro">
+                      <label for="outro">Prefiro não informar</label>-->
+                      <!--<label for="genero">Gênero:</label>-->
+                      <select name="genero" class="genero">
+                        <option value="none" selected disabled hidden>Selecione</option>
+                        <option value="homem-cis">Homem cis</option>
+                        <option value="homem-trans">Homem trans</option>
+                        <option value="mulher-cis">Mulher cis</option>
+                        <option value="mulher-trans">Mulher trans</option>
+                        <option value="nao-binario">Não-binário</option>
+                        <option value="outro">Outro</option>
+                      </select>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <!--PÁGINAS ACIMA-->
+            <!--ATENÇÃO ABAIXO-->
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                  <button type="button" id="prevBtn" onclick="nextPrev(-1)">Voltar</button>
+                  <button type="button" id="nextBtn" onclick="nextPrev(1)">Continuar</button>
+                </div>
+              </div>
+              
+              <!-- Circles which indicates the steps of the form:-->
+              <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+              </div>
+        </form>
+    
+    </div>
+<script>
+
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form ...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  // ... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Concluído";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Continuar";
+  }
+  // ... and run a function that displays the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form... :
+  if (currentTab >= x.length) {
+    //...the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false:
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class to the current step:
+  x[n].className += " active";
+}
+
+</script>
+
+<script>
+  function check() {
+    var input = document.getElementById('password_confirm');
+    if (input.value != document.getElementById('password').value) {
+        input.setCustomValidity('Password Must be Matching.');
+    } else {
+        // input is valid -- reset the error message
+        input.setCustomValidity('');
+    }
+}
+</script>
+
+</body>
+</html>

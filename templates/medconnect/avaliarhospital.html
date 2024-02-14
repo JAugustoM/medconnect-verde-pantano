@@ -1,0 +1,176 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliar {{ hospital.nome }} - MedConnect</title>
+    <link rel="shortcut icon" href="../img/favicon_io/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "styles/header_e_footer.css"%}">
+    <link rel="stylesheet" href="{% static "styles/avaliarhospital.css"%}">
+    <link rel="stylesheet" href="{% static "styles/FazerLogin.css"%}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 10,
+            'wght' 200,
+            'GRAD' 0,
+            'opsz' 36;
+            z-index: 1;
+            font-size: 36px;
+            color: gray;
+            font-family: 'Material Symbols Outlined';
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{% static "js/select.js" %}"></script>
+    <script src="{% static "js/login.js" %}"></script>
+    <script src="{% static "js/barra_pesquisa.js"%}"></script>
+    <script src="{% static "js/login_popup.js"%}"></script>
+</head>
+<body>
+    <!-- MENU SUPERIOR -->
+    {% include "medconnect/partials/_login.html" %}
+    {% include "medconnect/partials/_header.html" %} 
+    <main>
+        <a href={% url "mais_informacoes" hospital.cnes %}><i class="uil uil-angle-down"></i></a>
+        <h1><strong>AVALIAR LOCAL</strong></h1>
+        <hr/>
+        <div id="inf_gerais">
+            <div class="nome_local">
+                <h3><strong>{{ hospital.nome }}</strong></h3>
+                <span style="margin-bottom: 10px;"><small>{{ hospital.endereco }}.</small></span> 
+                <span style="margin-bottom: 10px;"><small>CEP: {{ hospital.nome }}</small></span>
+                <div id="container_contato">
+                    <div style="margin-bottom: 10px;" class="#">
+                        <span><small>Contato: </small></span> 
+                        <span><small>{{ hospital.telefone }}</small></span>
+                    </div>
+                    <div style="margin-bottom: 0px;" class="#">
+                        <span class="email_1"><small>Email: </small></span> 
+                        <span><small>{{ hospital.email }}</small></span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="box_tempos_medios">
+                <span>Tempos médios de espera:</span>
+                <div class="tempos_de_espera">
+                    <div class="tempos">
+                        <span class="c-orange"><abbr title="Tempo médio de espera para pacientes muito urgentes"></abbr></span>
+                        <span><abbr title="Tempo médio de espera para atendimento de pacientes muito urgentes">{{ hospital.tempo_muito_urgente}} min</abbr></span>
+                    </div>
+                    <div class="tempos">
+                        <span class="c-yellow"><abbr title="Tempo médio de espera para pacientes urgentes"></abbr></span>
+                        <span><abbr title="Tempo médio de espera para atendimento de pacientes urgentes">{{ hospital.tempo_urgente }} min</abbr></span>
+                    </div>   
+                    <div class="tempos">   
+                        <span class="c-green"><abbr title="Tempo médio de espera para pacientes pouco urgentes"></abbr></span>
+                        <span><abbr title="Tempo médio de espera para atendimento de pacientes pouco urgentes">{{ hospital.tempo_pouco_urgente }} min</abbr></span>
+                    </div>
+                    <div class="tempos">  
+                        <span class="c-blue"><abbr title="Tempo médio de espera para pacientes não urgentes"></abbr></span> 
+                        <span><abbr title="Tempo médio de espera para atendimento de pacientes não urgentes">{{ hospital.tempo_nao_urgente }} min</abbr></span>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<span class="gerais">Avaliações:</span>-->
+        <hr/>
+        <!--<p style="margin-top: 10px"><strong>VOCÊ ESTÁ AVALIANDO [NOME DO LOCAL].</strong></p>-->
+        <br/>
+    <div id="container">
+        <form action="{% url "avaliar_hospital" hospital.cnes %}" method="POST">
+            {% csrf_token %}
+            <!--<div class="question">
+                <span>• VOCÊ RECEBEU ATENDIMENTO NA UNIDADE?</span>
+                <span class="respostas">
+                    <button value="Sim" class="sim">SIM</button>
+                    <button value="Nao" class="nao">NÃO</button>
+                </span>
+            </div>-->
+            <div class="question">
+                <span>• QUAL FOI A CLASSIFICAÇÃO DE RISCO RECEBIDA?</span>
+                <div id="class_de_risco">   
+                    <div class="risco">
+                        <input type="radio" id="red" name="risco" value="EMERGENTE" style="accent-color: red;">
+                        <label for="red" title="text" style="font-weight: 400;">Emergente</label>
+                    </div>
+                    <div class="risco">
+                        <input type="radio" id="orange" name="risco" value="MUITO_URGENTE" style="accent-color: orange;">
+                        <label for="orange" title="text" style="font-weight: 400;">Muito urgente</label>
+                    </div>
+                    <div class="risco">
+                        <input type="radio" id="yellow" name="risco" value="URGENTE" style="accent-color: yellow;">
+                        <label for="yellow" title="text" style="font-weight: 400;">Urgente</label>
+                    </div>   
+                    <div class="risco">   
+                        <input type="radio" id="green" name="risco" value="POUCO_URGENTE" style="accent-color: green;">
+                        <label for="green" title="text" style="font-weight: 400;">Pouco urgente</label>
+                    </div>
+                    <div class="risco">  
+                        <input type="radio" id="blue" name="risco" value="NAO_URGENTE" style="accent-color: blue;">
+                        <label for="blue" title="text" style="font-weight: 400;">Não urgente</label>  
+                    </div>     
+                </div>
+            </div>
+            <br/><br/> 
+            <div class="input1">
+                <span>• EM QUE DIA E HORÁRIO VOCÊ CHEGOU AO LOCAL?</span>
+                <span>
+                    <input type="datetime-local" name="horario_entrada" id="horario-entrada" required="">
+                </span>
+            </div>
+            <br/><br/>
+            <div class="input1">
+                <span>• EM QUE DIA E HORÁRIO VOCÊ FOI ATENDIDO?</span>
+                <span>
+                    <input type="datetime-local" name="horario_atendimento" id="horario-atendimento" required="">
+                </span>
+            </div>
+            <br/><br/>
+            <div class="input1" style="width: 530px;">
+                <span>• QUAL FOI O DIA E O HORÁRIO DE SAÍDA?</span>
+                <span>
+                    <input type="datetime-local" name="horario_saida" id="horario-saida" required="">
+                </span>
+            </div>
+            <br/><br/>
+            <div class="question">
+                <span>• COMO VOCÊ AVALIA O ATENDIMENTO RECEBIDO?</span>
+                <div id="stars">
+                <div class="avaliacao">
+                    <input type="radio" id="star5" name="avaliacao" value="5"/>
+                    <label for="star5">5 estrelas</label>
+                    <input type="radio" id="star4" name="avaliacao" value="4" />
+                    <label for="star4">4 estrelas</label>
+                    <input type="radio" id="star3" name="avaliacao" value="3" />
+                    <label for="star3">3 estrelas</label>
+                    <input type="radio" id="star2" name="avaliacao" value="2" />
+                    <label for="star2">2 estrelas</label>
+                    <input type="radio" id="star1" name="avaliacao" value="1" />
+                    <label for="star1">1 estrela</label>
+                </div>
+                </div>
+            </div>
+            <br/><br/>
+            <div class="question"></div>
+                <span style="font-weight: 500;">• VOCÊ TEM MAIS ALGUMA OBSERVAÇÃO SOBRE O ATENDIMENTO RECEBIDO?</span>
+                <br/> 
+                <textarea name="observacao" cols=90 rows=7></textarea>
+            </div>
+            <br/><hr/><br/>
+            <button type="submit" id="enviar">ENVIAR</button>   
+        </form>
+    </div>
+    </main>
+    {% include "medconnect/partials/_footer.html"%}
+    <script src="../static/js/togglemenu.js"></script>
+</body>
+</html>

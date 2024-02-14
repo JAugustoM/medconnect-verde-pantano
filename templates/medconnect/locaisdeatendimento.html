@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locais de atendimento | MedConnect</title>
+    <link rel="shortcut icon" href="../img/favicon_io/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "styles/header_e_footer.css"%}">
+    <link rel="stylesheet" href="{% static "styles/locaisdeatendimento.css"%}">
+    <link rel="stylesheet" href="{% static "styles/FazerLogin.css"%}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 10,
+            'wght' 200,
+            'GRAD' 0,
+            'opsz' 36;
+            z-index: 1;
+            font-size: 36px;
+            color: gray;
+            font-family: 'Material Symbols Outlined';
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{% static "js/select.js" %}"></script>
+    <script src="{% static "js/login.js" %}"></script>
+    <script src="{% static "js/barra_pesquisa.js"%}"></script>
+    <script src="{% static "js/login_popup.js"%}"></script>
+</head>
+<body>
+    <!-- MENU SUPERIOR -->
+    {% include "medconnect/partials/_login.html" %}
+    {% include "medconnect/partials/_header.html" %}
+    <main>
+        <section id="resultados-da-pesquisa">
+            <!--<h1><strong>RESULTADOS DA PESQUISA:</strong></h1>
+            <hr/>-->
+            <ul>
+                {% for hospital in hospitais %}
+                <li>
+                    <div class="nome_local">
+                        <h3><strong><a style="text-decoration:none; color:inherit;" href="{% url "mais_informacoes" hospital.cnes %}">{{ hospital.nome }}<a></strong></h3>
+                        <span>{{ hospital.endereco }}. CEP: {{ hospital.cep }}</span> 
+                    </div>
+                    <div class="informacoes">
+                        <div class="tempos_de_espera">
+                            <div class="tempos">
+                                <span class="c-orange"></span>
+                                <span><abbr title="Tempo médio de espera para atendimento de pacientes muito urgentes">{{ hospital.tempo_muito_urgente}} min</abbr></span>
+                            </div>
+                            <div class="tempos">
+                                <span class="c-yellow"></span>
+                                <span><abbr title="Tempo médio de espera para atendimento de pacientes urgentes">{{ hospital.tempo_urgente }} min</abbr></span>
+                            </div>   
+                            <div class="tempos">   
+                                <span class="c-green"></span>
+                                <span><abbr title="Tempo médio de espera para atendimento de pacientes pouco urgentes">{{ hospital.tempo_pouco_urgente }} min</abbr></span>
+                            </div>
+                            <div class="tempos">  
+                                <span class="c-blue"></span> 
+                                <span><abbr title="Tempo médio de espera para atendimento de pacientes não urgentes">{{ hospital.tempo_nao_urgente }} min</abbr></span>  
+                            </div>     
+                        </div>
+                        <button class="info"><a href="{% url "mais_informacoes" hospital.cnes %}"><abbr style="text-decoration:none;" title="Clique aqui para acessar mais informações sobre este hospital"><span style="font-size: 22px;">+</span><span> INFORMAÇÕES</span></abbr></a></button>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </section> 
+    </main>
+    {% include "medconnect/partials/_footer.html"%}
+    <script src="../static/js/togglemenu.js"></script>
+</body>
+
+</html>

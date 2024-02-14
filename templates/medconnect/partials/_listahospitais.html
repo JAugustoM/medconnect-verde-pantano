@@ -1,0 +1,41 @@
+{% load static %}
+
+<section id="resultados-da-pesquisa">
+    <!--<h1><strong>RESULTADOS DA PESQUISA:</strong></h1>
+    <hr/>-->
+    {% for message in messages %}
+    <h1><strong>{{ message }}</strong></h1>
+    <hr/>
+    {% endfor %}
+    <ul>
+        {% for hospital in hospitais %}
+        <li>
+            <div class="nome_local">
+                <h3><strong>{{ hospital.nome }}</strong></h3>
+                <span>{{ hospital.endereço }}. CEP: {{ hospital.cep }}</span> 
+            </div>
+            <div class="informacoes">
+                <div class="tempos_de_espera">
+                    <div class="tempos">
+                        <span class="c-orange"></span>
+                        <span>{{ hospital.tempo_muito_urgente}} min</span>
+                    </div>
+                    <div class="tempos">
+                        <span class="c-yellow"></span>
+                        <span>{{ hospital.tempo_urgente }} min</span>
+                    </div>   
+                    <div class="tempos">   
+                        <span class="c-green"></span>
+                        <span>{{ hospital.tempo_pouco_urgente }} min</span>
+                    </div>
+                    <div class="tempos">  
+                        <span class="c-blue"></span> 
+                        <span>{{ hospital.tempo_nao_urgente }} min</span>  
+                    </div>     
+                </div>
+                <button class="info"><a href="{% url "mais_informacoes" hospital.cnes %}"><span style="font-size: 22px;">+</span><span> INFORMAÇÕES</span></a></button>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</section>

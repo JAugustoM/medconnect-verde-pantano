@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedConnect</title>
+    <link rel="stylesheet" href="{% static 'styles/Redefinir_Senha.css' %}">
+</head>
+<body class="body_Redefinir">
+    <div class="multi-step-form-container">
+        <form action="{% url "redefinir_senha" username token %}" method="POST">
+            {% csrf_token %}
+            <h1 class="titule_Redefinir">Redefinir Senha</h1>
+                <p class="frase_Redefinir">Para finalizar o processo digite e confirme sua nova senha</p>
+                <b>
+                <p class="inputs_Text_Redefinir">Nova senha:</p>
+                </b>
+                <input name="senha_1" class="inputs_Box_Redefinir" type="password" placeholder="digite aqui" size="56">
+                <b>
+                    <p class="inputs_Text_Redefinir">Confirmação:</p>
+                </b>
+                <input name="senha_2" class="inputs_Box_Redefinir" type="password" placeholder="digite novamente aqui" size="56">
+                <br>
+            <button type="submit" class="btn_ConfirmarNovaSenha">Redefinir senha</button>
+        </form>
+    </div>
+</body>
+</html>

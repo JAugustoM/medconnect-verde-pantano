@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mais informações - Medicamentos disponíveis | MedConnect</title>
+    <link rel="shortcut icon" href="../img/favicon_io/favicon.ico" typoe="image/x-icon">
+    <link rel="stylesheet" href="estilo/header_e_footer.css">
+    <link rel="stylesheet" href="estilo/escalas_e_medicamentos.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!--AVALIAÇÃO EM ESTRELAS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 10,
+            'wght' 200,
+            'GRAD' 0,
+            'opsz' 36;
+            z-index: 1;
+            font-size: 36px;
+            color: gray;
+            font-family: 'Material Symbols Outlined';
+        }      
+    </style>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 10,
+            'wght' 200,
+            'GRAD' 0,
+            'opsz' 36;
+            z-index: 1;
+            font-size: 36px;
+            color: gray;
+            font-family: 'Material Symbols Outlined';
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <!-- MENU SUPERIOR -->
+    <header>
+        <div id="logotipo">
+            <img id="icone" src="../img/estetoscopio32px.png" alt="MedConnect logo." />
+            <span id="titulo">MedConnect</span>
+        </div>
+        <nav>         
+            <a href="../Página medconnect/index .html" rel="prev" target="_self">INÍCIO</a>
+            <span class="divisor">|</span>
+            <a href="../Página - Locais de atendimento/locaisdeatendimento.html" target="_self" style="font-weight: 650;">LOCAIS DE ATENDIMENTO</a>
+            <span class="divisor">|</span>
+            <a href="area_do_paciente.html" target="_self">PRÉ-TRIAGEM</a>
+            <!--<a href="area_do_colaborador.html" target="_self">ÁREA DO COLABORADOR</a>-->
+            <span class="divisor">|</span>
+            <a href="../Página - Dúvidas frequentes/duvidas_frequentes.html" target="_self">DÚVIDAS FREQUENTES</a>
+            <!-- 'target="_self"': continua na mesma aba. --> 
+        </nav>
+        <button id="btnPesquisar">
+            <p style="font-size: 15px; font-weight: 500; margin-right: 7px;">PESQUISAR</p>
+            <span class="material-symbols-outlined" style="color: black; font-size: 25px;">search</span>
+        </button>
+        <button type="button" class="login_box">
+            <span style="font-size: 11px;">JOSEFO ALENCAR</span>
+            <span class="material-symbols-outlined">account_circle</span>
+        </button>
+            <!--</a>-->
+                
+        <div class="content_account">
+            <button><p style="font-size: 11px; padding: 9px 0;">MEUS DADOS</p></button>
+            <button><p style="font-size: 11px; padding: 9px 0;">MINHAS AVALIAÇÕES</p></button>
+            <button style="border-radius: 0px 0px 20px 20px;"><p style="font-size: 11px; padding: 9px 0;">SAIR DO PERFIL</p></button>
+        </div>
+    </header>
+        <section id="pesquisa"> 
+            <div id="top-bar1" style="display: none;">
+                <span>Selecione o tipo de pesquisa:</span>
+                <a href="../Página - Locais de atendimento/locaisdeatendimento.html" target="_self"><button id="locais_de_atendimento">Locais de atendimento</button></a>
+                <a href="../Página - Dúvidas frequentes/duvidas_frequentes.html" target="_self"><button id="outras_duvidas">Outras dúvidas</button></a>
+                <button id="fechar_aba" style="display: none;"><span class="material-symbols-outlined" style="font-size: 25px; height: 20px;">close</span></button>
+            </div>
+                <!-- <div id="top-bar2"> -->
+            <div id="top-bar2" style="display: none;"> 
+                <button class="voltar"><i class="uil uil-angle-left" style="font-size: 30px; color: gray;"></i></button>
+                <span class="spanPesquisar">
+                    <span class="material-symbols-outlined" style="color: black; font-size: 25px">search</span>
+                    <input type="text" id="txt_outras_duvidas" placeholder="PESQUISAR..."/>
+                </span>
+                <div class="wrapper">
+                    <div class="select-btn">
+                        <span>UF</span>
+                        <i class="uil uil-angle-down"></i>
+                    </div>
+                    <div class="content">
+                        <div class="search">
+                            <i class="uil uil-search"></i>
+                            <input type="text" placeholder="Pesquisar">
+                        </div>
+                        <ul class="options"></ul>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="select-btn">
+                        <span>CIDADE</span>
+                        <i class="uil uil-angle-down"></i>
+                    </div>
+                    <div class="content">
+                        <div class="search">
+                            <i class="uil uil-search"></i>
+                            <input type="text" placeholder="Pesquisar">
+                        </div>
+                        <ul class="options"></ul>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="select-btn">
+                        <span>ESPECIALIDADE</span>
+                        <i class="uil uil-angle-down"></i>
+                    </div>
+                    <div class="content">
+                        <div class="search">
+                            <i class="uil uil-search"></i>
+                            <input type="text" placeholder="Pesquisar">
+                        </div>
+                        <ul class="options"></ul>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="select-btn">
+                        <span>LOCAL</span>
+                        <i class="uil uil-angle-down"></i>
+                    </div>
+                    <div class="content">
+                        <div class="search">
+                            <i class="uil uil-search"></i>
+                            <input type="text" placeholder="Pesquisar">
+                        </div>
+                        <ul class="options"></ul>
+                    </div>
+                </div>
+                <button id="btnProcurar"><span class="material-symbols-outlined" style="color: black; font-size: 30px">search</span></button>
+            </div>
+            <div id="top-bar3" style="display: none;">
+                <button class="voltar"><i class="uil uil-angle-left" style="font-size: 30px; color: gray; margin-left: 25px;"></i></button>
+                <span class="spanPesquisar">
+                    <span class="material-symbols-outlined" style="color: black; font-size: 25px">search</span>
+                    <input type="text" id="txt_pesquisar_locais" placeholder="PESQUISAR..."/>
+                </span>
+            </div>
+        </section> 
+    <main>
+        <a href="../Página - Mais informações/maisinformacoes.html"><i class="uil uil-angle-down"></i></a>
+        <h1><strong>INFORMAÇÕES GERAIS — MEDICAMENTOS DISPONÍVEIS</strong></h1>
+        <hr/>
+        <div id="inf_gerais">  
+            <div id="gerais">  
+                <h3><strong>HOSPITAL 1</strong></h3>
+                <span><small>Qs 115, Avenida dos Pinheiros.</small></span>
+                <span><small>CEP: 11-111.111</small></span>
+                <div id="container_contato">
+                    <span><small>Contato:</small></span> 
+                    <div id="contato">
+                        <span><small>telefone</small></span>
+                        <span><small>e-mail</small></span>
+                    </div>
+                </div>
+            </div>
+            <div class="tempos_de_espera">
+                <div class="tempos">
+                    <span class="c-orange"></span>
+                    <span>x min</span>
+                </div>
+                <div class="tempos">
+                    <span class="c-yellow"></span>
+                    <span>x min</span>
+                </div>   
+                <div class="tempos">   
+                    <span class="c-green"></span>
+                    <span>x min</span>
+                </div>
+                <div class="tempos">  
+                    <span class="c-blue"></span> 
+                    <span>x min</span>  
+                </div>     
+            </div>
+        </div>
+        <hr/>
+        <div id="fontes">
+            <span>FONTES:</span>
+            <div id="f">
+                <a href="https://opendatasus.saude.gov.br/dataset/hospitais-e-leitos/resource/5701f27f-a202-4605-a944-7dbe888c0445/view/3d1e5da4-fefc-4e2c-bdde-917e50d44088">🞄 Banco de dados OPENDATASUS;</a>
+                <a href="https://info.saude.df.gov.br/transparenciaativanovo/">🞄 Portal "Transparência e Prestação de Contas" - SES-DF.</a>
+            </div>
+        </div>
+            <!-- <div class="detalhamento">ESCALA DO DIA:</div> -->
+    </main>
+    <script type="text/javascript" src="js/script_maisinformacoes.js"></script> 
+    <footer>
+        <p>MedConnect, c2023.</p>
+        <p>Site criado por feudo 9 - "Verde Pântano".</p>
+    </footer>
+</body>
+</html>

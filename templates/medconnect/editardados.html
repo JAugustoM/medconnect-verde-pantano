@@ -1,0 +1,504 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Meus dados | MedConnect</title>
+    <link rel="shortcut icon" href="../../img/favicon_io/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "styles/header_e_footer.css"%}">
+    <link rel="stylesheet" href="{% static "styles/editardados.css"%}">
+    <link rel="stylesheet" href="{% static "styles/FazerLogin.css"%}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 10,
+            'wght' 200,
+            'GRAD' 0,
+            'opsz' 36;
+            z-index: 1;
+            font-size: 36px;
+            color: gray;
+            font-family: 'Material Symbols Outlined';
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{% static "js/select.js" %}"></script>
+    <script src="{% static "js/login.js" %}"></script>
+    <script src="{% static "js/barra_pesquisa.js"%}"></script>
+    <script src="{% static "js/login_popup.js"%}"></script>
+</head>
+<body>
+    <!-- MENU SUPERIOR -->
+    {% include "medconnect/partials/_login.html" %}
+    {% include "medconnect/partials/_header.html" %} 
+        <main>
+        <div id="box_title">
+            <a href="{% url "meus_dados" %}"><i class="uil uil-angle-down"></i></a>
+            <h1 id="title">MEUS DADOS</h1>
+        </div>
+            <hr/>
+            <span id="aviso">*Os dados informados não são obrigatórios. Podem ajudar no entendimento de seu caso de saúde.</span>
+    <form method="POST" id="form" action="{% url "editar_dados" %}">
+        {% csrf_token %}
+        <div class="general_container">
+            <div class="group">
+                <span>Nome:</span>
+                <input name="p_nome" type="text" placeholder="Insira aqui seu nome">
+                <span>Sobrenome:</span>
+                <input name="s_nome" type="text" placeholder="Insira aqui seu sobrenome">
+            </div>
+            <div class="group">
+                <span>Data de nascimento:</span>
+                <input name="data_nascimento" type="date" id="idade">
+            </div>
+            <div class="group">
+                <span>Genero:</span>
+                <select name="genero" class="genero">
+                    <option value="none" selected disabled hidden>Selecione</option>
+                    <option value="homem-cis">Homem cis</option>
+                    <option value="homem-trans">Homem trans</option>
+                    <option value="mulher-cis">Mulher cis</option>
+                    <option value="mulher-trans">Mulher trans</option>
+                    <option value="nao-binario">Não-binário</option>
+                    <option value="outro">Outro</option>
+                  </select>
+            </div>
+                <!--<input type="radio" id="feminino" name="feminino" value="feminino">
+                <label for="feminino">Feminino</label>-->
+            <div class="group">
+                <span id="profissao"><span style="color: black;">Profissão:</span>
+                <input name="profissao" type="text" placeholder="Informe sua profissão">
+                <span id="informe_profissao">Ao informar sua profissão/ocupação, você permite que o contexto em que vive seja melhor compreendido, possibilitando uma percepção mais adequada à sua situação de saúde.</span>
+                </span>
+            </div>
+            <div class="group">
+                <span>Endereço:</span>
+                <input name="endereco" type="text" placeholder="Caso deseje, informe seu endereço">
+            </div>
+            <div class="group">
+                <div id="contato">
+                    <!-- <span>Contato:</span> -->
+                    <div class="group">
+                        <span>Telefone:</span>
+                        <input type="tel" name="telefone" placeholder="Insira seu n° de telefone">
+                    </div>
+                    <!--<div class="group">
+                        <span>E-mail:</span>
+                        <input type="email" name="email" placeholder="Insira seu email">
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="general_container">
+            <h2>CONDIÇÕES FÍSICAS</h2>
+        <div class="inner_container">
+            <div class="group">
+                <span>Peso (kg):</span>
+                <input type="number" name="peso" step=".01">
+            </div>
+            <div class="group">
+                <span>Altura (metros):</span>
+                <input type="number" name="altura" step=".01">
+            </div>
+            <div class="group">
+                <span>Tipo sanguíneo:</span>
+                <select name="tipo_sanguineo">
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="na">Não sei</option>
+                </select>
+            </div>
+        </div>
+        <div class="inner_container">
+            <div class="complete_answer">
+                
+            <span>Consome cigarro ou álcool?</span>
+                <div>
+                <input type="radio" id="sim1" name="sim-nao1" value="sim">
+                <label for="sim1">Sim</label>
+                <input type="radio" id="nao1" name="sim-nao1" value="nao">
+                <label for="nao1">Não</label>
+                </div>
+                <div id="answer1">
+                    <span class="subquestion">Com que frequência?</span>
+                    <div class="f">
+                        <div>
+                            <input type="radio" id="d1" name="freq1" value="d">
+                            <label for="d1">Diariamente</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="s1" name="freq1" value="s">
+                            <label for="s1">Semanalmente</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="m1" name="freq1" value="m">
+                            <label for="m1">Mensalmente</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="a1" name="freq1" value="a">
+                            <label for="a1">Anualmente</label>
+                        </div>
+                    </div>
+            </div>
+            <div class="complete_answer">
+            <span>Pratica exercício(s) físico(s)?</span>
+                <div>
+                <input type="radio" id="sim2" name="sim-nao2" value="sim">
+                <label for="sim2">Sim</label>
+                <input type="radio" id="nao2" name="sim-nao2" value="nao">
+                <label for="nao2">Não</label>
+                </div>
+                <div id="answer2">
+                    <span class="subquestion">Qual(is)?</span>
+                    <input type="text" name="exercicio">
+                    <span class="subquestion">Com que frequência?</span>
+                    <div class="f">
+                        <div>
+                            <input type="radio" id="d2" name="freq2" value="d">
+                            <label for="d2">Diariamente</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="s2" name="freq2" value="s">
+                            <label for="s2">Semanalmente</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="m2" name="freq2" value="m">
+                            <label for="m2">Mensalmente</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="a2" name="freq2" value="a">
+                            <label for="a2">Anualmente</label>
+                        </div>
+                    </div>
+                    <!--<span class="subquestion">Nesse período, quantas vezes você pratica exercícios físicos?</span>
+                    <input type="number" id="freq_ex_fisicos" name="freq_ex_fisicos">-->
+                </div>
+            </div>
+        </div>
+        </div>
+
+            <h2>HISTÓRICO DE SAÚDE</h2>
+        <div class="general_container">
+            <h3>HISTÓRIA MÉDICA PREGRESSA</h3>
+            <div class="hmp_container">
+                <h4>Doenças crônicas</h4>
+                
+                <span>Possui doença(s) crônica(s)?</span>
+                <div class="c1">
+                    <input type="radio" id="sim3" name="sim-nao3" value="sim">
+                    <label for="sim3">Sim</label>
+                    <input type="radio" id="nao3" name="sim-nao3" value="nao">
+                    <label for="nao3">Não</label>
+                </div>
+                
+                <div id="outer_box_doenca_cronica">
+                    <span>Qual(is)?</span>
+                    <div class="inner_box_doenca_cronica" id="doença_cronica0">
+                    <div class="organize_button">
+                        <div class="addmoreadd1">
+                            <button type="button" class="add_doenca_cronica">Adicionar</button>
+                        </div>
+                        <input type="text" class="doenca_cronica" name="doenca_cronica" placeholder="Insira aqui a condição crônica">
+                        <!-- <input type="image" class="comp_doenca_cronica" name="comp_doenca_cronica"> -->
+                    </div>
+                        <div class="group">
+                            <span>Adicione uma imagem do documento de comprovação da condição:</span>
+                            <input type="file" class="img_doenca_cronica" id="img_doenca_cronica0" name="comp_doenca_cronica" onchange="previewFile()"><br>
+                            <!-- <img src="" class="show_doenca_cronica" width="200" alt="Image preview..."> -->
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="hmp_container">
+                <h4>Sintomas recorrentes</h4>
+
+                <span>Apresenta sintoma(s) recorrente(s)?</span>
+                <div class="c1">
+                    <input type="radio" id="sim4" name="sim-nao4" value="sim">
+                    <label for="sim4">Sim</label>
+                    <input type="radio" id="nao4" name="sim-nao4" value="nao">
+                    <label for="nao4">Não</label>
+                </div>
+                
+                <div id="outer_box_sintoma">
+                    <span>Qual(is)?</span>
+                    <div class='inner_box_sintoma' id="sintoma0">
+                    <div class="organize_button">
+                        <div class="addmoreadd2">
+                            <button type="button" class="add_sintoma">Adicionar</button>
+                        </div>
+                        <!-- <div class="group"> -->
+                            <input type="text" name="sintomas" class="sintomas" placeholder="Descreva aqui o sintoma">
+                    </div>
+                            <!--<div class="group">
+                                <span>Adicione a data e o horário aproximado de início do sintoma:</span>
+                                <input type="datetime-local" class="datetime_sintoma" name="data_sintoma">
+                            </div>-->
+                        <!-- </div> -->
+                    </div>
+                </div>  
+            </div>
+            <div class="hmp_container">
+                <h4>Diagnósticos</h4>
+                
+                <span>Possui condição(ões) diagnosticada(s)?</span>
+                <div class="c1">
+                    <input type="radio" id="sim5" name="sim-nao5" value="sim">
+                    <label for="sim5">Sim</label>
+                    <input type="radio" id="nao5" name="sim-nao5" value="nao">
+                    <label for="nao5">Não</label>
+                </div>
+                
+                <div id="outer_box_diagnostico">
+                    <span class="subquestion">Qual(is)?</span>
+                    
+                    <div class='inner_box_diagnostico' id="diagnostico0">
+                        <div class="organize_button">
+                            <div class="addmoreadd3">
+                                <button type="button" class="add_diagnostico">Adicionar</button>
+                            </div>
+                            <input type='text' name='doencas-diag' class="doencas" placeholder="Insira a condição diagnosticada">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hmp_container">
+                <h4>Cirurgias</h4>
+                
+                <span>Já foi submetido a cirurgia(s)?</span>
+                <div class="c1">
+                    <input type="radio" id="sim6" name="sim-nao6" value="sim">
+                    <label for="sim6">Sim</label>
+                    <input type="radio" id="nao6" name="sim-nao6" value="nao">
+                    <label for="nao6">Não</label>
+                </div>
+                
+                <div id="outer_box_cirurgia">
+                    <span class="subquestion">Qual(is)?</span>
+                    <div class='inner_box_cirurgia' id="cirurgia0">
+                        <div class="organize_button">
+                            <div class="addmoreadd4">
+                                <button type="button" class="add_cirurgia">Adicionar</button>
+                            </div>
+                            <div> 
+                                <span>Cirurgia realizada:<input type='text' name='cirurgias' class="cirurgias" placeholder="Adicione o tipo de cirurgia"></span>
+                            </div>
+                        </div>
+                        <div>
+                          <span>Data:<input type='date' name='data_cirurgia' class="data_cirurgia"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hmp_container">
+                <h4>Internações</h4>
+                
+                <span>Já foi internado(a)?</span>
+                <div class="c1">
+                    <input type="radio" id="sim7" name="sim-nao7" value="sim">
+                    <label for="sim7">Sim</label>
+                    <input type="radio" id="nao7" name="sim-nao7" value="nao">
+                    <label for="nao7">Não</label>
+                </div>
+                <div id="outer_box_internacao">
+                    <div class='inner_box_internacao' id="internacao0">
+                        <div class="organize_button">
+                            <div class="addmoreadd5">
+                                <button type="button" class="add_internacao">Adicionar</button>
+                            </div>
+                            <div>
+                                <span class="subquestion">Motivo:</span>
+                                <input type='text' name='motivo_internacao' class="motivo_internacao" placeholder="Adicione o motivo da internação">
+                            </div>
+                        </div>
+                        <div>
+                            <span class="subquestion">Tempo:</span>
+                            <input type='number' name='tempo_internacao' class="tempo_internacao" placeholder="Em dias">
+                        </div>
+                        <div>
+                          <span>Data:<input type='date' name='data_internacao' class="data_internacao"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="general_container">
+            <h3>HISTÓRICO FAMILIAR</h3>
+                <p>Registre aqui condições de saúde existentes em sua família.</p>
+                <p>Deseja adicionar uma condição?</p>
+                <div class="c1">
+                    <input type="radio" id="sim8" name="sim-nao8" value="sim">
+                    <label for="sim8">Sim</label>
+                    <input type="radio" id="nao8" name="sim-nao8" value="nao">
+                    <label for="nao8">Não</label>
+                </div>
+                <div id="outer_condicao_familiar">
+                    <div class="inner_condicao_familiar" id="condicao_familiar0">
+                        <div class="condicao_familiar">
+                            <div class="organize_button">
+                                <div class="addmoreadd6">
+                                    <button type="button" class="add_condicao_familiar">Adicionar</button>
+                                </div>
+                                <span>Grau de parentesco:</span>
+                            </div>
+                            <div>
+                                <select name="grau_parentesco" class="grau_parentesco">
+                                    <option value=" ">       </option>
+                                    <option value="1">1° Grau</option>
+                                    <option value="2">2° Grau</option>
+                                    <option value="3">3° Grau</option>
+                                </select>
+                                <!--<input type='radio' class="1grau" value="1" name="grau_parentesco">
+                                    <label for="1grau">1º grau</label>
+                                <input type='radio' class="2grau" value="2" name="grau_parentesco">
+                                    <label for="2grau">2º grau</label>
+                                <input type='radio' class="3grau" value="3" name="grau_parentesco">
+                                    <label for="3grau">3º grau</label>-->
+                            </div>
+                            <div>
+                                <span>Condição:</span>
+                                <input type='text' class="condicao" name="condicao">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="general_container">
+            <h3>USO DE MEDICAMENTOS</h3>
+            <div class="inner_container">
+                
+                <span>Utiliza medicamento(s) com prescrição médica?</span>
+                <div class="c1">
+                    <input type="radio" id="sim9" name="sim-nao9" value="sim">
+                    <label for="sim9">Sim</label>
+                    <input type="radio" id="nao9" name="sim-nao9" value="nao">
+                    <label for="nao9">Não</label>
+                </div>
+
+                <div id="outer_med_cp">
+                    <div class="inner_med_cp" id="med_cp0">
+                        <div class="addmoreadd7">
+                            <button type="button" class="add_med_cp">Adicionar</button>
+                        </div>
+                        <div>
+                          <span class="subquestion">Medicamento:</span>
+                          <input name="medicamento_cp" type='text' class="med_cp" placeholder="Nome/tipo do medicamento">
+                        </div>
+                        <div>
+                            <span>Frequência:</span>
+                            <div class='f'>
+                                <select name="freq3">
+                                    <option value=""></option>
+                                    <option value="d">Diariamente</option>
+                                    <option value="s">Semanalmente</option>
+                                    <option value="m">Mensalmente</option>
+                                    <option value="a">Anualmente</option>
+                                </select>
+                                <!--<div>
+                                    <input type='radio' class="d3" name="freq3" value="d">
+                                    <label for= "d3">Diariamente</label>
+                                </div>
+                                <div>
+                                    <input type="radio" class="s3" name="freq3" value="s">
+                                    <label for="s3">Semanalmente</label>
+                                </div>
+                                <div>
+                                    <input type='radio' class="m3" name="freq3" value="m">
+                                    <label for="m3">Mensalmente</label>
+                                </div>
+                                <div>
+                                    <input type='radio' class="a3" name="freq3" value="a">
+                                    <label for="a3">Anualmente</label>
+                                </div>-->
+                            </div>
+                        </div>
+                        <span>Neste período, quantas vezes você usa o medicamento?</span>
+                        <input type='number' class="freq_med_cp" name="freq_med_cp">
+                    </div>
+                </div>
+            </div>
+            <div class="inner_container">
+                
+                <span>Utiliza medicamento(s) sem prescrição médica?</span>
+                <div class="c1">
+                    <input type="radio" id="sim10" name="sim-nao10" value="sim">
+                    <label for="sim10">Sim</label>
+                    <input type="radio" id="nao10" name="sim-nao10" value="nao">
+                    <label for="nao10">Não</label>
+                </div>
+                
+                <div id="outer_med_sp">
+                    <div class="inner_med_sp" id="med_sp0">
+                        <div class="addmoreadd8">
+                            <button type="button" class="add_med_sp">Adicionar</button>
+                        </div>
+                        <div>
+                          <span class="subquestion">Medicamento:</span>
+                          <input name="medicamento_sp" type='text' class="med_sp" placeholder="Nome/tipo do medicamento">
+                        </div>
+                        <div>
+                            <span>Frequência:</span>
+                            <div class='f'>
+                                <select name="freq4">
+                                    <option value=""></option>
+                                    <option value="d">Diariamente</option>
+                                    <option value="s">Semanalmente</option>
+                                    <option value="m">Mensalmente</option>
+                                    <option value="a">Anualmente</option>
+                                </select>
+                                <!--<div>
+                                    <input type='radio' class="d4" name="freq4" value="d">
+                                    <label for="d4">Diariamente</label>
+                                </div>
+                                <div>
+                                    <input type='radio' class="s4" name="freq4" value="s">
+                                    <label for="s4">Semanalmente</label>
+                                </div> 
+                                <div>
+                                    <input type='radio' class="m4" name="freq4" value="m">
+                                    <label for="m4">Mensalmente</label>
+                                </div>
+                                <div>
+                                    <input type='radio' class="a4" name="freq4" value="a">
+                                    <label for="a4">Anualmente</label>
+                                </div>-->
+                            </div>
+                          Neste período, quantas vezes você usa o medicamento?
+                          <input type='number' class="freq_med_sp" name="freq_med_sp">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- <h3>(Resultados de exames)**</h3>
+            <span>Aqui é possível anexar exames para serem consultados em caso de necessidade. Não dee ser o local primordial de consulta.</span> -->
+
+            <!--<div><a href=""><button>EDITAR DADOS</button></a></div>-->
+        
+        <div>
+            <input type="hidden" id="result" value="" name="dados">
+            <button id="submit">Salvar</button>
+            <input type="submit" id="submit2">
+        </div>
+    </form>
+    <!--<pre id="result"></pre>-->
+        </main>
+        {% include "medconnect/partials/_footer.html"%}
+        <script src="js/togglemenu.js"></script>
+        <script src="{% static "js/editardados.js"%}"></script>
+</body>
+</html>

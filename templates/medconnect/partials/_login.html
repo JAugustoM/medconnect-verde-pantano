@@ -1,0 +1,43 @@
+{% load static %}
+
+{% for message in messages %}
+    <div class="message {{message.tags}}">
+        <h4>{{ message }}</h4>
+    </div>
+{% endfor %}
+<div class="modal_box_login hidden">
+    <div class="modal_login">
+        <!-- <a href="SobreNos.html"><img style="width: 20px; position: relative; bottom:20px; left: -15px;" src="MIDIA/IMG/voltar (1).png" alt="icone voltar"></a> -->
+        <!-- <button class="voltar2"><i class="uil uil-angle-left" style="font-size: 30px; color: gray;"></i></button> -->
+        <div id="header_login">
+            <h1 class="titule">Fazer login</h1>
+            <span class="material-symbols-outlined voltar2">close</span>
+        </div>
+        <a style="text-decoration: none" href="{% url "cadastro" %}"><p class="CriarConta" >Criar conta</p></a>
+        <form action="{% url "login" %}" method="POST">
+            {% csrf_token %}
+            <input name="usuario" class="email_login" style="display: block;" type="text" placeholder="EMAIL">
+            <input name="senha" class="password_login" style="display: block;" type="password" placeholder="SENHA">
+            <input name="url" type="hidden" value="{{ request.path }}">
+            <p class="link_esqueciSenha">esqueci a senha</p>
+            <input type="submit" style="display: block;" type="button" value="REALIZAR LOGIN" id="button_login">
+        </form>
+    </div>
+    <div class="modal_esqueciSenha hidden">
+        <!-- <a href="FazerLogin.html"><img class="modal_icon_back" src="MIDIA/IMG/voltar (1).png" alt="icone voltar"></a> -->
+        <div id="modal_title">
+            <button class="voltar3"><i class="uil uil-angle-left" style="font-size: 30px; color: gray;"></i></button>
+            <h1 class="modal_title">Esqueci minha senha</h1>
+        </div>
+        <p class="modal_phrase">
+            Para redefinir sua senha, informe o e-mail cadastrado na sua conta e 
+            lhe enviaremos um link com as instruções:
+        </p>
+        <form action="{% url "confirma_email" %}" method="POST">
+            {% csrf_token %}
+            <input name="url" type="hidden" value="{{ request.path }}">
+            <input name="email" class="modal_email" type="email" placeholder="EMAIL">
+            <input type="submit" class="modal_button" type="button" value="Enviar">
+        </form>
+    </div>
+</div>

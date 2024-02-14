@@ -1,0 +1,121 @@
+{% load static %}
+
+<header id="principal-header">
+    <div class="header_content">
+        {% comment %} <a style="text-decoration:none; color: inherit;" href="{% url "index" %}" id="link_sobre_nos"> {% endcomment %}
+        <span class="material-symbols-outlined" id="menu_icon" onclick="togglemenu()">menu</span>
+            <a href="{% url "sobre_nos" %}" id="link_sobre_nos">
+            <div id="logotipo">
+                <img id="icone" src="{% static "img/estetoscopio32px.png"%}" alt="MedConnect logo." />
+                <span id="titulo">MedConnect</span>
+            </div>
+            </a>
+        
+        <nav id="menuList">
+                {% if request.path == "/" %}
+                
+                <a href="{% url "index" %}" rel="prev" target="_self" style="font-weight: 650;">
+                    <abbr style='text-decoration:none; color: inherit;' title="página inicial">INÍCIO</abbr>
+                </a>
+                    <span class="divisor">|</span>
+                {% else %}
+                    <a href="{% url "index" %}" rel="prev" target="_self">
+                        <abbr style="text-decoration:none; color:inherit;" title="página inicial">INÍCIO</abbr>
+                    </a>
+                    <span class="divisor">|</span>
+                {% endif %}
+            
+            {% if request.path == "/atendimento"%}
+                <a href="{% url "locais_de_atendimento" %}" target="_self" style="font-weight: 650;">
+                    <abbr style="text-decoration:none; color:inherit;" title="pesquisa de hospitais">LOCAIS DE ATENDIMENTO</abbr>
+                </a>
+                <span class="divisor">|</span>
+            {% else %}
+                <a href="{% url "locais_de_atendimento" %}" target="_self">
+                    <abbr style="text-decoration:none; color:inherit;" title="pesquisa de hospitais">LOCAIS DE ATENDIMENTO</abbr>
+                </a>
+                <span class="divisor">|</span>
+            {% endif %}
+            {% if request.path == "/triagem" %}
+                <a href="{% url "triagem" %}" target="_self" style="font-weight: 650;">
+                    <abbr style="text-decoration:none; color:inherit;" title="avaliação de urgência">PRÉ-TRIAGEM</abbr>
+                </a>
+                <span class="divisor">|</span>
+            {% else %}
+                <a href="{% url "triagem" %}" target="_self">
+                    <abbr style="text-decoration:none; color:inherit;" title="avaliação de urgência">PRÉ-TRIAGEM</abbr>
+                </a>
+                <span class="divisor">|</span>
+            {% endif %}
+            {% if request.path == "/duvidas_frequentes" %}
+                <a href="{% url "duvidas_frequentes" %}" target="_self" style="font-weight: 650;">
+                    <abbr style="text-decoration:none; color:inherit;" title="informações sobre o site">DÚVIDAS FREQUENTES</abbr>
+                </a>
+            {% else %}
+                <a href="{% url "duvidas_frequentes" %}" target="_self">
+                    <abbr style="text-decoration:none; color:inherit;" title="informações sobre o site">DÚVIDAS FREQUENTES</abbr>
+                </a>
+            {% endif %}
+            
+        </nav>
+        <div id="box-sl">
+        <button id="btnPesquisar">
+            <p style="font-size: 15px; font-weight: 500; margin-right: 7px;">
+                <abbr style="text-decoration:none; color:inherit;" title="filtrar e buscar informação">PESQUISAR</abbr>
+            </p>
+            <span class="material-symbols-outlined" style="color: black; font-size: 25px;">search</span>
+        </button>
+        <span class="material-symbols-outlined" id="account_circle2">account_circle</span>
+        {% if user.is_authenticated %}
+            <button type="button" class="login_box">
+                <span id="name-account" style="font-size: 11px;">{{ user.first_name }}</span>
+                <span class="material-symbols-outlined" id="account_circle1">account_circle</span>
+            </button>
+        {% else %}
+            <button type="button" class="login_box2">
+                <span  style="font-size: 11px;">Realizar Login</span>
+                <span class="material-symbols-outlined">account_circle</span>
+            </button>
+        {% endif %}
+            <!--</a>-->
+                
+        <div class="content_account">
+            <button><a style="text-decoration: none; color: inherit;" href="{% url "meus_dados" %}"><p style="font-size: 11px; padding: 9px 0;"><abbr style="text-decoration:none; color: inherit; border-radius: 20px 20px 0 0;" title="minhas informações pessoais">MEUS DADOS</abbr></p></a></button>
+            <button><a style="text-decoration: none; color: inherit;" href="{% url "minhas_avaliacoes" %}"><p style="font-size: 11px; padding: 9px 0;"><abbr style="text-decoration:none; color: inherit;" title="minhas avaliações de hospitais">MINHAS AVALIAÇÕES</abbr></p></a></button>
+            <button style="border-radius: 0px 0px 20px 20px;"><a style="text-decoration: none; color: inherit;" href="{% url "logout" %}"><p style="font-size: 11px; padding: 9px 0;">SAIR DO PERFIL</p></a></button>
+        </div>
+    </div>
+</header>
+    <section id="pesquisa"> 
+        <div id="top-bar1" style="display: none;">
+            <span>Selecione o tipo de pesquisa:</span>
+            <abbr title="encaminha para locais de atendimento"><button id="locais_de_atendimento">Locais de atendimento</button></abbr>
+            <abbr title="encaminha para dúvidas frequentes"><a href="{% url "duvidas_frequentes" %}"><button id="outras_duvidas">Outras dúvidas</button></a></abbr>
+            <button id="fechar_aba" style="display: none;"><span class="material-symbols-outlined" style="font-size: 25px; height: 20px;">
+                close
+                </span></button>
+            <!-- <input type="radio" name="..." id="procurar_locais">
+            <label for="procurar_locais" title="text" style="font-weight: 400;">Locais de atendimento</label>
+            <input type="radio" name="..." id="outras_duvidas">
+            <label for="outras_duvidas" title="text" style="font-weight: 400;">Outras dúvidas</label> -->
+        </div>
+        <div id="top-bar2" style="display: none;">
+            <button class="voltar" style="background-color: transparent; border: none;"><i class="uil uil-angle-left" style="font-size: 30px; color: gray;"></i></button>
+            <form action="{% url 'buscar' %}">
+                <input class="pesquisa" name="buscar" type="text" id="txt_outras_duvidas" placeholder="PESQUISAR HOSPITAL"/>
+                <!--<div class="wrapper">
+                    {{ filter.uf }}
+                </div>
+                <div class="wrapper">
+                    {{ filter.municipio }}
+                </div>
+                <div class="wrapper">
+                    {{ filter.especialidade }}
+                </div>-->
+                <div class="wrapper">
+                    {{ filter.categoria }}
+                </div>
+                <button type="submit" id="btnProcurar"><span class="material-symbols-outlined" style="color: black; font-size: 30px">search</span></button>
+            </form>
+        </div>
+    </section>

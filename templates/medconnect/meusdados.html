@@ -1,0 +1,230 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Meus dados | MedConnect</title>
+    <link rel="stylesheet" href="{% static "styles/header_e_footer.css"%}">
+    <link rel="stylesheet" href="{% static "styles/meusdados.css"%}">
+    <link rel="stylesheet" href="{% static "styles/FazerLogin.css"%}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 10,
+            'wght' 200,
+            'GRAD' 0,
+            'opsz' 36;
+            z-index: 1;
+            font-size: 36px;
+            color: gray;
+            font-family: 'Material Symbols Outlined';
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{% static "js/select.js" %}"></script>
+    <script src="{% static "js/login.js" %}"></script>
+    <script src="{% static "js/barra_pesquisa.js"%}"></script>
+    <script src="{% static "js/login_popup.js"%}"></script>
+</head>
+<body>
+    <!-- MENU SUPERIOR -->
+    {% include "medconnect/partials/_login.html" %}
+    {% include "medconnect/partials/_header.html" %}
+    {% load medconnect_extras %}
+
+    <main>
+        <!-- <div id="dados_gerais"> -->
+            <h1 id="box_title">
+                <span id="title">MEUS DADOS</span>
+                <div id="editar_dados">
+                    <a href="{% url "editar_dados" %}">
+                        <button id="btn_editar_dados">EDITAR DADOS</button>
+                    </a>
+                </div>
+            </h1>
+            <hr/>
+        <!-- <div id="dados_gerais"> -->
+        <div class="general_container">
+            <span id="nome_completo">Nome completo:<span id="nome">{{ user.first_name }} {{user.last_name}}</span></span>
+    
+            <span>Data de nascimento:<span id="idade">{{ user.dados.data_nascimento|date:"d/m/Y" }}</span></span>
+                
+            <span>Sexo:<span id="sexo">{{ user.dados.get_genero_display}}</span></span>
+                
+            <span>Profissão:<span id="profissao">{{ user.dados.profissao }}</span></span>
+                
+            <span>Endereço:<span id="endereco">{{ user.dados.endereco }}</span></span>
+                
+            <div id="contato">
+                <h5>Contato:<h5>
+                    <!-- <div id="tipos_contato"> -->
+                    <div id="tipos_contato">
+                        <span>Telefone:<span id="telefone">{{ user.dados.telefone }}</span></span>
+                            
+                        <span>E-mail:<span id="e-mail">{{ user.email }}</span></span>         
+                    </div>
+            </div>
+        </div>
+
+        <!-- <div id="condicoes_fisicas"> -->
+        <div class="general_container">
+            <h2>CONDIÇÕES FÍSICAS</h2>
+        <div class="inner_container">
+            <span>Peso:<span id="peso">{{ user.dados.peso }} kg</span></span>
+                
+            <span>Altura:<span id="altura">{{ user.dados.altura }} m</span></span>
+                
+            <span>Tipo sanguíneo:<span id="tp_sanguineo">{{ user.dados.get_tipo_sanguineo_display }}</span></span>
+        </div>
+        <div class="inner_container">
+            <div class="complete_answer">
+                <span>Consome cigarro ou álcool?<span id="resp1">{{ user.dados.get_fumo_alcool_display }}</span></span>
+                <!--<span>Frequência:<span id="freq1">[frequência]</span></span>-->        
+            </div>
+            <div class="complete_answer">
+                <span>Pratica exercícios físicos?<span id="resp2">{{ user.dados.get_exercicio_frequencia_display }}</span></span>  
+                {% if user.dados.exercicio_frequencia != "n" %}  
+                    <span id="exercicio_praticado">Exercício praticado: {{ user.dados.exercicio }}</span>
+                {% endif %}
+                <!--<span>Frequência:<span id="freq2">[frequência]</span></span>-->      
+            </div>
+        </div>
+        </div>  
+
+        <h2>HISTÓRICO DE SAÚDE</h2>
+
+    <!-- <div id="historia_medica_pregressa"> -->
+    <div class="general_container">
+        <h3>HISTÓRIA MÉDICA PREGRESSA</h3>
+        <div class="hmp_container" style="margin-top: 0px;">
+            <h4>Doenças crônicas</h4>
+                {% for doenca in user.doencas.all %}
+                <div id="doencas_cronicas">
+                    <ul id="d_cronica_ul">
+                        <li class="d_cronica_li">{{ doenca.doenca }}</li>
+                    </ul> 
+                </div>
+                {% empty %}
+                <span class="sem_registro">Não houve registros.</span>
+                {% endfor %}
+        </div>        
+        <div class="hmp_container">
+            <h4>Sintomas recorrentes</h4>
+                {% for sintoma in user.sintomas.all %}
+                <div id="sintomas_recorrentes">
+                    <ul>
+                        <li class="sintoma_li">{{ sintoma.sintoma }}</li>
+                    </ul> 
+                </div>
+                {% empty %}
+                <span class="sem_registro">Não houve registros.</span>
+                {% endfor %}
+        </div>
+        <div class="hmp_container">
+            <h4>Diagnósticos</h4>
+                {% for diagnostico in user.diagnosticos.all %}
+                <div id="diagnosticos">
+                    <ul id="diagnostico_ul">
+                        <li class="diagnostico_li">{{ diagnostico.diagnostico }}</li>
+                    </ul> 
+                </div>
+                {% empty %}
+                <span class="sem_registro">Não houve registros.</span>
+                {% endfor %}
+        </div>
+        <div class="hmp_container">
+            <h4>Cirurgias</h4>
+                {% for cirurgia in user.cirurgias.all %}
+                <div id="cirurgias">
+                    <ul id="cirurgia_ul">
+                        <li class="cirurgia_li">{{ cirurgia.cirurgia }}</li>
+                    </ul> 
+                </div>
+                {% empty %}
+                <span class="sem_registro">Não houve registros.</span>
+                {% endfor %}
+        </div>
+        <div class="hmp_container">
+            <h4>Internações</h4>
+                {% if user.internacoes.all %}
+                <span>Número de internações:<span id="num_internacoes">{{ user.internacoes.all|length }}</span></span>
+                <span>Motivos:<span id="motivos_internacao">
+                    {% for internacao in user.internacoes.all %}
+                        {% if forloop.last %}
+                            {{ internacao.internacao|lower }}.
+                        {% else %}
+                            {{ internacao.internacao|lower }},
+                        {% endif %}
+                    {% endfor %}
+                </span></span>
+                {% else %}
+                <span class="sem_registro">Não houve registros.</span>
+                {% endif %}
+        </div>
+    </div>
+
+        <div class="general_container">
+            <h3>HISTÓRICO FAMILIAR</h3>
+                {% for condicao in user.condicao_familiar.all %}
+                <span>Grau de parentesco:<span class="grau_parentesco">{{ condicao.get_grau_parentesco_display }}</span></span>
+                <span>Condição: {{ condicao.condicao }}</span>
+                {% empty %}
+                <span class="sem_registro">Não houve registros.</span>
+                {% endfor %}
+                    
+        </div>
+
+        <div class="general_container">
+            <h3>USO DE MEDICAMENTOS</h3>
+            <div class="inner_container">
+                <span style="font-weight: 440; text-decoration: underline;">Medicamentos utilizados com prescrição médica:</span>
+                    {% for medicamento in user.medicamentos.all|tipo_medicamento:"1" %}
+                    <div class="medicamentos">
+                        <span>Nome:<span class="nome_med_cp">{{ medicamento.medicamento }}</span></span>
+                        <span>Frequência:<span class="freq_med_cp">{{ medicamento.get_frequencia_display }}</span></span>
+                    </div>
+                    {% empty %}
+                    <span class="sem_registro">Não houve registros.</span>
+                    {% endfor %}
+            </div>
+
+            <div class="inner_container">
+                <span style="font-weight: 440; text-decoration: underline;">Medicamentos utilizados sem prescrição médica:</span>
+                    {% for medicamento in user.medicamentos.all|tipo_medicamento:"2" %}
+                    <div class="medicamentos">
+                        <span>Nome:<span class="nome_med_cp">{{ medicamento.medicamento }}</span></span>
+                        <span>Frequência:<span class="freq_med_cp">{{ medicamento.get_frequencia_display }}</span></span>
+                    </div>
+                    {% empty %}
+                    <span class="sem_registro">Não houve registros.</span>
+                    {% endfor %}
+            </div>
+        </div>
+        <hr/>
+            <!-- <h3>(Resultados de exames)**</h3>
+            <span>Aqui é possível anexar exames para serem consultados em caso de necessidade. Não deve ser o local primordial de consulta.</span> -->
+
+
+            <!--OBSERVAÇÃO: O histórico médico on-line deve ser armazenado de forma organizada, em uma base de dados segura e adequada, e apresentar assinatura digital válida junto a autoridades como o Ministério da Saúde.
+
+            As informações históricas presentes no prontuário pertencem ao paciente e, portanto, devem estar disponíveis sempre que ele solicitar.
+
+            Também são confidenciais, uma vez que estão protegidas por mecanismos do Código de Ética Médica, como o sigilo entre médico e paciente.
+
+            Atendendo a esses padrões, o documento on-line tem o mesmo efeito do histórico em papel, sendo válido para fins assistenciais, legais e jurídicos, nas situações que forem requeridas.-->
+        </main>
+        <footer>
+            <div class="footer_content">
+                <p>©2023, MedConnect.</p>
+                <p>Verde Pântano - Desenvolvimento de Sotfware, 2023/2.</p>
+            </div>
+        </footer>
+        <script src="../static/js/togglemenu.js"></script>
+</body>
+</html>

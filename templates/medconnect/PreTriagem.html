@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-triagem | Medconnect</title>
+    <link rel="stylesheet" href="{%static "styles/PreTriagem.css" %}">
+    <link rel="stylesheet" href="{% static "styles/header_e_footer.css" %}">
+    <link rel="stylesheet" href="{% static "styles/FazerLogin.css"%}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        body{
+        background-color: #ededed;
+    }
+    </style>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 10,
+            'wght' 200,
+            'GRAD' 0,
+            'opsz' 36;
+            z-index: 1;
+            font-size: 36px;
+            color: gray;
+            font-family: 'Material Symbols Outlined';
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{% static "js/select.js" %}"></script>
+    <script src="{% static "js/login.js" %}"></script>
+    <script src="{% static "js/barra_pesquisa.js"%}"></script>
+    <script src="{% static "js/login_popup.js"%}"></script>
+</head>
+<body>
+    {% include "medconnect/partials/_login.html" %}
+    {% include "medconnect/partials/_header.html" %}
+    <form action="{% url "triagem" %}" method="POST">
+    {% csrf_token %}
+    <div class="container_pre-triagem">
+        <div class="div1">
+            <h1 class="titule_pre-triagem">QUESTIONÁRIO DE PRÉ-TRIAGEM</h1>
+            <p class="phrase_pre-triagem">
+                O site Medconnect disponibiliza uma ferramenta de pré-triagem com base no Protocolo Manchester.
+                Essa ferramenta é útil para estimar a prioridade de atendimento de um paciente em um serviço de urgência e emergência. No entanto, é importante lembrar que <u>a pré-triagem é apenas uma estimativa e não substitui a avaliação presencial de um profissional de saúde.</u>
+            <br><br>
+                O Protocolo Manchester é um sistema de classificação de risco utilizado em serviços de urgência e emergência para determinar a prioridade de atendimento. Ele é dividido em cinco níveis, sendo que o nível 1 corresponde às situações de emergência, que requerem atendimento imediato, e o nível 5 corresponde às situações de não urgência, que podem ser atendidas no mesmo dia ou encaminhadas para a atenção primária.
+            <br><br>
+                A pré-triagem disponibilizada pelo site Medconnect segue o protocolo estabelecido na maioria dos hospitais. No entanto, existem alguns fatores que podem influenciar a classificação real do paciente no hospital, tais como:
+            <br><br>
+                A avaliação clínica do paciente pelo profissional de saúde;
+                A disponibilidade de recursos no hospital;
+                A gravidade da condição do paciente;
+                Portanto, é importante que o paciente compareça ao serviço de urgência e emergência mesmo que a pré-triagem tenha indicado um nível de prioridade baixo. O profissional de saúde responsável pela avaliação clínica do paciente é quem irá definir a prioridade de atendimento real.
+            <br><br>
+                Aqui estão algumas dicas para obter uma pré-triagem mais precisa:
+                Responda às perguntas com sinceridade e precisão;
+                Forneça todas as informações relevantes sobre seu estado de saúde;
+                Se você não tiver certeza sobre a resposta a uma pergunta, consulte um profissional de saúde.
+                Agradecemos sua compreensão.
+            </p>
+            <input style="display: inline; margin-top: 30px; cursor: pointer;" type="checkbox" name="termo" value="1">
+                <label for="teste">DECLARO QUE <u>LI</u> E <u>CONCORDO</u> COM O PROPOSTO PELO QUESTIONÁRIO.</label>
+        </div>
+        <div class="div2">
+                <p style="color: black; font-size: 20px;"><strong>Oficialmente as Classificações de risco são:</strong></p>
+                <img style="width: 350px;" src="{% static "img/manchester.jpg"%}" alt="" srcset="">
+                <p class="pergunta_idade"><strong>Para um melhor resultado, qual é a idade do paciente?</strong></p>
+                <input class="checkbox_pre-triagem_1" type="radio" name="idade" value="1">
+                <label for="teste">até 14 anos</label>
+                <br>
+                <input class="checkbox_pre-triagem_1" type="radio" name="idade" value="2">
+                <label for="teste">acima de 14 anos</label>
+                <br>
+                <br>
+                <input class="btn_preTriagem" type="submit" value="continuar">
+        </div>
+    </div>
+    </form>
+    {% include "medconnect/partials/_footer.html"%}
+    <script src="../static/js/togglemenu.js"></script>
+</body>
+</html>
+
+{% comment %} get - manda a logica pra url
+post - manda a logica pro servidor (django) {% endcomment %}

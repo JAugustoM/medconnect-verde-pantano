@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-triagem | Medconnect</title>
+    <link rel="stylesheet" href="{% static "styles/adulto1.css" %}">
+    <link rel="stylesheet" href="{% static "styles/header_e_footer.css" %}">
+    <link rel="stylesheet" href="{% static "styles/FazerLogin.css"%}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body{
+            background-color: #ededed;
+        }
+    </style>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 10,
+            'wght' 200,
+            'GRAD' 0,
+            'opsz' 36;
+            z-index: 1;
+            font-size: 36px;
+            color: gray;
+            font-family: 'Material Symbols Outlined';
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{% static "js/select.js" %}"></script>
+    <script src="{% static "js/login.js" %}"></script>
+    <script src="{% static "js/barra_pesquisa.js"%}"></script>
+    <script src="{% static "js/login_popup.js"%}"></script>
+</head>
+<body>
+    {% include "medconnect/partials/_login.html"%}
+    {% include "medconnect/partials/_header.html"%}
+    <form action="{% url "adulto1" %}" method="POST">
+        {% csrf_token %}
+        <div class="container_adulto1">
+            <h1 class="titule_adulto1">QUESTIONÁRIO DE PRÉ-TRIAGEM</h1>
+            <hr/>
+            <strong>
+            <h2 style="margin-bottom:20px">selecione os seguintes sintomas do paciente</h2>
+            </strong>
+            <input class="checkbox_adulto1" type="checkbox" name="quest_a1" value="1">
+            <label class="subtitule_adulto1" for="quest_a1"> O paciente está com comprometimento da via aérea?</label>
+            <p class="phrase_adulto1">O comprometimento das vias aéreas pode ser causado por um corpo estranho, edema ou infecção, trauma ou lesão, inflamação ou doenças neuromusculares ocasionando a paralisia dos músculos da respiração.</p>
+            
+            <input class="checkbox_adulto1" type="checkbox" name="quest_a1" value="1">
+            <label class="subtitule_adulto1" for="quest_a1"> O paciente está com respiração ineficaz?</label>
+            <p class="phrase_adulto1">Apresenta sensação de dificuldade para respirar; Respiração rápida e superficial;
+                Respiração lenta e profunda; ausência de respiração; Respiração rápida e profunda;
+                uso de músculos que não são usados normalmente na respiração, como os músculos do pescoço, ombros e costas;
+                Ruídos anormais na respiração, como sibilância, ronco ou crepitação.</p>
+
+            <input class="checkbox_adulto1" type="checkbox" name="quest_a1" value="1">
+            <label class="subtitule_adulto1" for="quest_a1"> O paciente  está em choque?</label>
+            <p class="phrase_adulto1">O paciente pode parecer confuso, desorientado ou simplesmente não estar respondendo.
+                Pele fria, pálida ou úmida: a pele do paciente pode estar fria ao toque, pálida ou úmida.
+                Taquicardia: a frequência cardíaca do paciente pode estar acima de 100 batimentos por minuto.
+                Hipotensão: a pressão arterial do paciente pode estar baixa. Respiração rápida e
+                superficial: a respiração do paciente pode ser rápida e superficial. Desidratação:
+                o paciente pode estar com sede ou apresentar sinais de desidratação, como boca seca, urina concentrada ou diminuição da produção de urina.</p>
+            <br>
+            <div id="box-button">
+                <a href= "{% url "triagem" %}"><input class="btn_adulto1_voltar" type="button" value="voltar"></a>
+                <input class="btn_adulto1_continuar" type="submit" value="continuar">
+            </div>
+        </div>
+    </form>
+    {% include "medconnect/partials/_footer.html"%}
+    <script src="../static/js/togglemenu.js"></script>
+</body>
+</html>
