@@ -1,0 +1,385 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+*{
+    margin:0;
+    font-family:Josefin Sans;
+}
+
+body{
+    background-image:url('../img/bg_criarconta.jpg');
+    background-size:cover;
+    /*background-color: darkolivegreen;*/
+}
+
+/*main{*/
+/*#regForm{*/
+.multi-step-form-container{
+    background-color:white;
+    width:700px;
+    position:absolute;
+    right:30px;
+    margin-top:0px;
+    padding:30px;
+    text-align:center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    /*novo*/
+    justify-content: flex-end;
+}
+
+/*input[type=text], input[type=password]{
+    width:100%;
+    display:inline-block;
+    border-width: 0px 0px 1px 0px;
+    /*border-color
+}
+
+input[type=text]:focus, input[type=password]:focus{
+    background-color:#ededed;
+    outline:none;
+}*/
+
+input{
+    padding:10px;
+    width:95%;
+    font-size:17px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-width:1px;
+    outline:none;
+    resize:none;
+}
+
+.input2{
+    padding:10px;
+    width:120%;
+    font-size:17px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-width:1px;
+    /*text-align:center;*/
+    outline:none;
+    resize:none;
+}
+
+.input3 {
+    padding: 10px;
+    width: 80%;
+    font-size: 17px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-width: 1px;
+    /*text-align: center;*/
+    outline: none;
+    resize: none;
+    background-color:white /*yellow*/;
+    margin-left:-39px;
+}
+
+/*#continuar{*/
+#nextBtn{
+    background-color:#0081f1;
+    outline:none;
+    border-width:0;
+    color:white;
+    padding:14px 20px;
+    border-radius:10px;
+    text-transform:uppercase;
+    margin:8px;
+    cursor:pointer;
+    /*width:100%;*/
+    opacity:0.9;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/*#continuar:hover{*/
+#nextBtn:hover{
+    opacity:1;
+}
+
+#prevBtn{
+    background-color:#0081f1;
+    outline:none;
+    border-width:0;
+    color:white;
+    padding:14px 20px;
+    border-radius:10px;
+    text-transform:uppercase;
+    margin:8px;
+    cursor:pointer;
+    /*width:100%;*/
+    opacity:0.9;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/*#continuar:hover{*/
+#prevBtn:hover{
+    opacity:1;
+}
+
+input-invalid{
+    background-color:#ffdddd;
+}
+
+.tab{
+    display:none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    /*display: inline-block;*/
+    display:none;
+    opacity: 0.5;
+  }
+  
+  /* Mark the active step: */
+  .step.active {
+    opacity: 1;
+  }
+  
+  /* Mark the steps that are finished and valid: */
+  .step.finish {
+    background-color: #04AA6D;
+  }
+
+  h2 {
+    margin: 0;
+}
+
+/*#multi-step-form-container {
+    /*margin-top: 5rem;
+    margin-top:0;
+    padding:30px;
+    background-color:pink;
+    width:600px;
+    left:500px;
+    position:relative;
+}*/
+
+.text-center {
+    text-align: center;
+}
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+.pl-0 {
+    padding-left: 0;
+}
+.button {
+    padding: 0.7rem 1.5rem;
+    border: 1px solid #4361ee;
+    background-color: #4361ee;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform:uppercase;
+    /*float:right;
+    margin-left:10px;*/
+}
+.submit-btn {
+    border: 1px solid #0e9594;
+    background-color: #0e9594;
+    /*float:right;*/
+}
+.mt-3 {
+    margin-top: 2rem;
+}
+.d-none {
+    display: none;
+}
+.form-step {
+    border: /*1px solid rgba(0, 0, 0, 0.1)*/0;
+    /*border-radius: 20px;
+    padding: 3rem;*/
+}
+.font-normal {
+    font-weight: normal;
+}
+ul.form-stepper {
+    counter-reset: section;
+    margin-bottom: 3rem;
+}
+ul.form-stepper .form-stepper-circle {
+    position: relative;
+}
+ul.form-stepper .form-stepper-circle span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+.form-stepper-horizontal {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+ul.form-stepper > li:not(:last-of-type) {
+    margin-bottom: 0.625rem;
+    -webkit-transition: margin-bottom 0.4s;
+    -o-transition: margin-bottom 0.4s;
+    transition: margin-bottom 0.4s;
+}
+.form-stepper-horizontal > li:not(:last-of-type) {
+    margin-bottom: 0 !important;
+}
+.form-stepper-horizontal li {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+.form-stepper-horizontal li:not(:last-child):after {
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 1px;
+    content: "";
+    top: 32%;
+}
+.form-stepper-horizontal li:after {
+    background-color: #dee2e6;
+}
+.form-stepper-horizontal li.form-stepper-completed:after {
+    background-color: #4da3ff;
+}
+.form-stepper-horizontal li:last-child {
+    flex: unset;
+}
+ul.form-stepper li a .form-stepper-circle {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 0;
+    line-height: 1.7rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.38);
+    border-radius: 50%;
+}
+.form-stepper .form-stepper-active .form-stepper-circle {
+    background-color: #4361ee !important;
+    color: #fff;
+}
+.form-stepper .form-stepper-active .label {
+    color: #4361ee !important;
+}
+.form-stepper .form-stepper-active .form-stepper-circle:hover {
+    background-color: #4361ee !important;
+    color: #fff !important;
+}
+.form-stepper .form-stepper-unfinished .form-stepper-circle {
+    background-color: #f8f7ff;
+}
+.form-stepper .form-stepper-completed .form-stepper-circle {
+    background-color: #0e9594 !important;
+    color: #fff;
+}
+.form-stepper .form-stepper-completed .label {
+    color: #0e9594 !important;
+}
+.form-stepper .form-stepper-completed .form-stepper-circle:hover {
+    background-color: #0e9594 !important;
+    color: #fff !important;
+}
+.form-stepper .form-stepper-active span.text-muted {
+    color: #fff !important;
+}
+.form-stepper .form-stepper-completed span.text-muted {
+    color: #fff !important;
+}
+.form-stepper .label {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+.form-stepper a {
+    cursor: default;
+}
+
+#regForm{
+    /*padding-top:50px;*/
+    background-color:white;
+}
+
+h1{
+    text-align:left;
+    padding-bottom:50px;
+}
+
+.formtag{
+    text-transform: uppercase;
+    text-align: left;
+    /*background-color:yellow;*/
+    margin-top:50px;
+    text-decoration: solid;
+}
+
+#infosenha{
+    text-align:left;
+    margin-top:50px;
+    color:rgba(0, 0, 0, 0.7);
+}
+
+.flex-container{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.flex-container-2{
+    background-color:white /*lightblue*/;
+    /*display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+    padding:20px;*/
+    display:flex;
+    gap:20px;
+    margin-bottom:22px;
+}
+
+.item-2{
+    background-color:white/*pink*/;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0;
+    margin-top:0;
+    margin-right:150px;
+}
+
+.item-3 {
+    background-color: /*pink*/white;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0;
+    margin-top: 0;
+    margin-right: 45px;
+}
+
+.genero{
+    width:225%;
+    height:150%;
+}
