@@ -1,0 +1,30 @@
+$(document).ready(function(){
+  $("#btnPesquisar").click(function(){
+   $("#top-bar1").toggle("fast");
+   $("#top-bar2").hide("fast");
+   $("#top-bar3").hide("fast");
+   $("#fechar_aba").show("fast");
+ });
+ $("#locais_de_atendimento").click(function(){
+   $("#top-bar2").toggle("fast");
+   $("#top-bar1").hide();
+   $("#top-bar3").hide();
+   $("#fechar_aba").show("fast");
+ });
+ $("#fechar_aba").click(function(){
+   $("#top-bar1").hide();
+   $("#top-bar2").hide();
+   $("#top-bar3").hide();
+ });
+ $(".voltar").click(function(){
+   $("#top-bar1").show();
+   $("#top-bar2").hide();
+   $("#top-bar3").hide();
+   $("#fechar_aba").show("fast");
+ }); 
+ $(".login_box").click(function(){
+   $("#top-bar1").hide();
+   $("#top-bar2").hide();
+   $("#top-bar3").hide();
+ }); 
+});
