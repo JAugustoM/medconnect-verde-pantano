@@ -217,7 +217,7 @@ def confirma_email(request):
                 "Redefinição de Senha",
                 message=
                 "Uma requisição de redefinição de senha foi feita no site MedConnect para a conta vinculada a este email, "
-                f"para prosseguir com a redefinição basta acessar o seguinte link: http://18.231.186.20:8000/redefinir_senha/{username}/{token}. "
+                f"para prosseguir com a redefinição basta acessar o seguinte link: http://{request.get_host()}/redefinir_senha/{username}/{token}. "
                 "Caso a requisição não tenha sido feita por você por favor ignore este email.",
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[email,],
