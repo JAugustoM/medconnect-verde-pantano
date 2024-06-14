@@ -193,7 +193,7 @@ def login_site(request):
 
         if user is not None:
             login(request, user)
-            messages.success(request, f"{usuario} autenticado com sucesso!")
+            messages.success(request, f"{user.first_name} autenticado com sucesso!")
             return redirect("index")
 
         else:
