@@ -194,11 +194,11 @@ def login_site(request):
         if user is not None:
             login(request, user)
             messages.success(request, f"{user.first_name} autenticado com sucesso!")
-            return redirect("index")
+            return redirect(request.POST["url"])
 
         else:
             messages.error(request, "Email ou senha incorretos", extra_tags="login")
-            return redirect("index")
+            return redirect(request.POST["url"])
 
 def confirma_email(request):
     if request.method == "POST":
